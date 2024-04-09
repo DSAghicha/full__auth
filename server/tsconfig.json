@@ -7,6 +7,7 @@
         "moduleResolution": "NodeNext",
         "outDir": "dist",
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "paths": {
             "*": ["./src/@types/*"]
         },
