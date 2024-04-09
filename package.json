@@ -1,0 +1,19 @@
+{
+    "name": "full__auth",
+    "description": "Auth Practice",
+    "version": "1.0.0",
+    "scripts": {
+        "server-install": "cd server && yarn",
+        "client-install": "cd client && yarn",
+        "full-install": "concurrently -n \"R,S,C\" -p \"[{name}]\" \"yarn\" \"yarn server-install\" \"yarn client-install\"",
+        "server-start": "cd server && yarn dev",
+        "client-start": "cd client && yarn dev",
+        "serve": "concurrently -n \"S,C\" -c \"bgBlue,bgMagenta\" -p \"[{name}]\" \"yarn server-start\" \"yarn client-start\""
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    },
+    "author": "DSAghicha",
+    "private": true,
+    "license": "MIT"
+}
