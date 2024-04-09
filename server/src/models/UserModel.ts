@@ -1,13 +1,5 @@
-import { PropType, getModelForClass, modelOptions, pre, prop } from "@typegoose/typegoose";
-import { hash } from "bcrypt";
+import { PropType, getModelForClass, modelOptions, prop } from "@typegoose/typegoose";
 
-@pre<User>("save", async function (next) {
-    const user = this;
-    if (!user.isModified("password")) {
-        return next();
-    }
-    user.password = await hash(user.password, 10);
-})
 @modelOptions({
     schemaOptions: { timestamps: true },
 })
