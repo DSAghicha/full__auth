@@ -5,6 +5,7 @@ import helmet from "helmet";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import { resolve } from "path";
+import { authRouter } from "./routes";
 
 //! CONFIGURATIONS
 dotenv.config({ path: resolve(__dirname, "../config.env") });
@@ -17,6 +18,10 @@ app.use(morgan("common"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cors());
+
+//! Setting up routes
+app.get("/api", (_, res) => res.send("Available"));
+app.use("/api/auth", authRouter);
 
 //! MONGODB & SERVER SETUP
 const URI = process.env.MONGO_URL;
