@@ -1,14 +1,11 @@
 import cors from "cors";
-import dotenv from "dotenv";
 import express, { json, urlencoded } from "express";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import morgan from "morgan";
-import { resolve } from "path";
+import { ACCESS_TOKEN, PORT, REFRESH_TOKEN, URI } from "./constants";
 import { authRouter } from "./routes";
 
-//! CONFIGURATIONS
-dotenv.config({ path: resolve(__dirname, "../config.env") });
 const app = express();
 
 app.use(express.json());
@@ -24,9 +21,9 @@ app.get("/api", (_, res) => res.send("Available"));
 app.use("/api/auth", authRouter);
 
 //! MONGODB & SERVER SETUP
-const URI = process.env.MONGO_URL;
-const PORT = process.env.PORT;
 if (!URI) throw "Cannot connect to mongodb";
+//! CHECKING REQUIRED ENV SETUP
+if (!ACCESS_TOKEN || !REFRESH_TOKEN || !PORT) throw "Configuration error!";
 
 mongoose
     .connect(URI, { dbName: "authTest" })
