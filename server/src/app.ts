@@ -1,10 +1,11 @@
-import cors from "cors";
-import express, { json, urlencoded } from "express";
-import helmet from "helmet";
-import mongoose from "mongoose";
-import morgan from "morgan";
-import { ACCESS_TOKEN, PORT, REFRESH_TOKEN, URI } from "./constants";
-import { authRouter } from "./routes";
+import cors from "cors"
+import express, { json, urlencoded } from "express"
+import helmet from "helmet"
+import mongoose from "mongoose"
+import morgan from "morgan"
+import { ACCESS_TOKEN, PORT, REFRESH_TOKEN, URI } from "./constants"
+import { Interceptors } from "./middlewares"
+import { authRouter } from "./routes"
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(morgan("common"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cors());
+app.use(Interceptors.appConfig)
 
 //! Setting up routes
 app.get("/api", (_, res) => res.send("Available"));
